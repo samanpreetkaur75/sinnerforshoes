@@ -1,4 +1,4 @@
-<h1>E-Commerce Final Project Jojo Jimena</h1>
+<h1>E-Commerce Final Project SAMANPREET KAUR </h1>
 
 <h1>Home Page</h1>
 <img src="images/home.png" alt="Home Page Image">
