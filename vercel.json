@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "e-commerce-ruby-on-rails",
+  "builds": [
+    {
+      "src": "Dockerfile",
+      "use": "@vercel/docker"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
+}

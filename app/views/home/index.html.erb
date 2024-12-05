@@ -1,0 +1,88 @@
+<form class="d-flex w-100 pb-3" role="search" method="get" action="<%= root_path %>">
+  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+  <input class="form-control me-2" type="number" placeholder="Min Price" aria-label="Min Price" name="min_price">
+  <input class="form-control me-2" type="number" placeholder="Max Price" aria-label="Max Price" name="max_price">
+  <div class="form-check me-2">
+    <input class="form-check-input" type="checkbox" value="1" id="on_sale" name="on_sale">
+    <label class="form-check-label" for="on_sale">
+      On Sale
+    </label>
+  </div>
+  <div class="form-check me-2">
+    <input class="form-check-input" type="checkbox" value="1" id="recently_modified" name="recently_modified">
+    <label class="form-check-label" for="recently_modified">
+      Recently Modified
+    </label>
+  </div>
+  <div class="form-check me-2">
+    <input class="form-check-input" type="checkbox" value="1" id="recently_created" name="recently_created">
+    <label class="form-check-label" for="recently_created">
+      Created At
+    </label>
+  </div>
+  <%= select_tag 'category', options_for_select(@categories.unshift('Select a category'), params[:category]), class: 'form-control me-2' %>
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Shopping Cart
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <% if @cart.empty? %>
+          <p>You have no items</p>
+        <% else %>
+          <% @cart.each do |product| %>
+            <div class="row pb-2">
+              <div class="col-8 d-flex justify-content-between align-items-center">
+                <span><%= product.name %> - $<%= product.price %></span>
+                <%= form_with(url: adjust_quantity_path(product.id), method: :post, local: true, class: 'd-flex align-items-center gap-3')  do |form| %>
+                  <span>Quantity: <%= session[:cart].count(product.id) %></span>
+                  <%= form.number_field :quantity, value: session[:cart].count(product.id), min: 0, class: 'form-control' %>
+                  <%= form.submit 'Update Quantity', class: 'btn btn-info' %>
+                <% end %>
+              </div>
+              <div class="col-4 d-flex justify-content-end">
+                <%= button_to 'remove from cart', remove_from_cart_path(product.id), method: :delete, class: 'btn btn-danger' %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <%= button_to "Checkout", checkout_create_path, class: 'btn btn-success', id: 'checkoutButton' %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row pt-3">
+  <% @filtered_products.each do |product| %>
+    <div class="col-md-3 pb-3">
+      <div class="card h-100">
+        <div class="card-body d-flex flex-column justify-content-between">
+          <%= image_tag(product.image, alt: product.name) if product.image.present? %>
+          <div class="pt-3">
+            <h5 class="card-title text-info text-uppercase">
+              <%= link_to product.name, product_path(product), class: "text-decoration-none" %>
+            </h5>
+            <p class="card-text text-dark"><%= product.description %></p>
+            <p class="card-text"><small class="text-muted">Sold by: <%= product.brand %></small></p>
+            <p class="card-text"><small class="text-muted">Stock: <%= product.stock_quantity %></small></p>
+          </div>
+          <div class="d-flex justify-content-between mt-auto pt-3">
+            <% if @cart.include?(product) %>
+              <div><%= button_to 'remove from cart', remove_from_cart_path(product.id), method: :delete, class: 'btn btn-warning' %></div>
+            <% else %>
+              <div><%= button_to 'add to cart', add_to_cart_path(product.id), method: :post, class: 'btn btn-primary' %></div>
+            <% end %>
+            <h5 class="mb-3"><%= number_to_currency(product.price) %></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="pagination justify-content-center mb-5">
+  <%= paginate @filtered_products, theme: 'bootstrap-5' %>
+</div>

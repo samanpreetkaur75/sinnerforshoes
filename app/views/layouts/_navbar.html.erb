@@ -1,0 +1,70 @@
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Welcome Here </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/abouts">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/admin">Admin</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Login', new_user_session_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* Custom Navbar Styles */
+  .custom-navbar {
+    background-color: #4e73df; /* Custom background color */
+    border-bottom: 2px solid #2e59d9; /* Optional: Adding a border at the bottom */
+  }
+
+  .navbar-dark .navbar-nav .nav-link {
+    color: white; /* Navbar link color */
+  }
+
+  .navbar-dark .navbar-nav .nav-link.active,
+  .navbar-dark .navbar-nav .nav-link:hover {
+    color: #ffdf00; /* Hover or active link color */
+  }
+
+  .navbar-dark .navbar-brand {
+    color: #ffdf00; /* Brand link color */
+  }
+
+  .navbar-dark .navbar-toggler-icon {
+    background-color: #ffdf00; /* Toggler icon color */
+  }
+
+  .navbar-dark .navbar-toggler {
+    border-color: #ffdf00; /* Border color of toggler */
+  }
+
+  /* Add padding and change font size */
+  .navbar {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+</style>

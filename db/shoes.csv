@@ -1,0 +1,7 @@
+name,category,image_url,description,price,stock_quantity,brand
+Running Shoes,Sports,,Comfortable running shoes,100.0,50,Nike
+Formal Shoes,Formal,https://static.lottedfs.com/prod/prd-img/87/20/25/01/00/02/20001252087_6.jpg/dims/resize/280X280,Stylish formal shoes,150.0,30,Clarks
+Sneakers,Casual,https://static.lottedfs.com/prod/prd-img/87/20/25/01/00/02/20001252087_6.jpg/dims/resize/280X280,Trendy sneakers for casual wear,80.0,40,Adidas
+Running Shoes,Sports,https://static.lottedfs.com/prod/prd-img/87/20/25/01/00/02/20001252087_6.jpg/dims/resize/280X280,Comfortable running shoes,100.0,50,Nike
+Formal Shoes,Formal,https://static.lottedfs.com/prod/prd-img/87/20/25/01/00/02/20001252087_6.jpg/dims/resize/280X280,Stylish formal shoes,150.0,30,Clarks
+Sneakers,Casual,https://static.lottedfs.com/prod/prd-img/87/20/25/01/00/02/20001252087_6.jpg/dims/resize/280X280,Trendy sneakers for casual wear,80.0,40,Adidas
